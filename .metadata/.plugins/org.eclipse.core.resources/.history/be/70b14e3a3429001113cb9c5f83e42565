@@ -1,0 +1,15 @@
+package com.example.board.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example.board.model.BoardDTO;
+
+@Service
+public class BoardServiceImple implements BoardService {
+	
+	@Override
+	public int boardWrite(BoardDTO dto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}

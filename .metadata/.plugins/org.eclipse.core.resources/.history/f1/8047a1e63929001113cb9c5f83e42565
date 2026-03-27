@@ -1,0 +1,9 @@
+package com.example.board.service;
+
+import com.example.board.model.BoardDTO;
+
+public interface BoardService {
+	
+	public int boardWrite(BoardDTO dto);
+
+}

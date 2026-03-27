@@ -1,0 +1,40 @@
+package com.example.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.example.user.model.UserDTO;
+import com.example.user.service.UserService;
+
+@Controller
+public class UserController {
+	
+	@Autowired
+	private UserService userService;
+
+	
+	@GetMapping("/signupPage")
+	public String signupPage() {
+		return "user/signup";
+	}
+	
+	@PostMapping("/signup")
+	public ModelAndView signupSebmit(UserDTO dto) {
+		
+		int count = userService.signup(dto);
+		String msg = count>0?"회원가입 성공하셨습니다.":"회원가입 실패하셨습니다.";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", msg);
+
+		return mav;
+	}
+	
+	@GetMapping("/loginPage")
+	public String loginPage() {
+		return "user/login";
+	}
+}

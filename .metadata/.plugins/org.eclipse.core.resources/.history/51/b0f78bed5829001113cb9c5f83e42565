@@ -1,0 +1,43 @@
+package com.example.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.example.board.model.BoardDTO;
+import com.example.board.service.BoardService;
+
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class BoardController {
+
+	@Autowired
+	private BoardService boardService;
+	
+	@GetMapping("/boardList")
+	public String boardListPage() {
+		return "board/boardList";
+	}
+	
+	@GetMapping("/boardWrite")
+	public String boardWritePage(HttpSession session, RedirectAttributes redirectAttributes) {
+		String id = (String)session.getAttribute("id");
+
+		if(id == null || id.equals("")) {
+			redirectAttributes.addFlashAttribute("msg", "로그인 후 게시글을 작성하실 수 있습니다.");
+			return "redirect:/loginPage"; // 로그인 페이지로 이동
+		}
+		return "board/boardWrite";
+	}
+	
+	@GetMapping("/boardContent/{boardIdx}")
+	public String boardContent(@PathVariable("boardIdx") int boardIdx, Model model) {
+	    BoardDTO board = boardService.boardContent(boardIdx);
+	    model.addAttribute("boardDTO", board);
+	    return "boardDetail";
+	}
+}

@@ -1,0 +1,56 @@
+package com.example.board.service;
+
+import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.board.model.BoardDTO;
+import com.example.mapper.board.BoardMapper;
+
+@Service
+public class BoardServiceImple implements BoardService {
+	
+	@Autowired
+	private BoardMapper boardMapper;
+	
+	@Override
+	public int boardWrite(BoardDTO dto) {
+		int count = boardMapper.boardWrite(dto);
+		return count;
+	}
+	
+	@Override
+	public List<BoardDTO> boardList(Map<String, Integer> map) {
+		List<BoardDTO> lists = boardMapper.boardList(map);
+		return lists;
+	}
+	
+	@Override
+	public int boardTotalCnt() {
+		int count = boardMapper.boardTotalCnt();
+		return count;
+	}
+	
+	@Override
+	public BoardDTO boardContent(int board_idx) {
+		BoardDTO dto = boardMapper.boardContent(board_idx);
+		return dto;
+	}
+	
+	@Override
+	public void boardReadnum(int board_idx, int readnum) {
+		boardMapper.boardReadnum(board_idx, readnum);
+	}
+	
+	@Override
+	public int boardDelete(int board_idx) {
+		int count = boardMapper.boardDelete(board_idx);
+		return count;
+	}
+	
+	@Override
+	public int boardUpdate(Map map) {
+		int count = boardMapper.boardUpdate(map);
+		return count;
+	}
+}

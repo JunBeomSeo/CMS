@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>맑은준범 - 로그인</title>
+<style>
+/* 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f5f7;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 로그인 컨테이너 */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+}
+
+/* 제목 */
+.login-container h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+    text-align: center;
+    color: #333;
+}
+
+/* 입력 필드 */
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.login-container input:focus {
+    border-color: #495057; /* 네이비톤 강조 */
+    outline: none;
+}
+
+/* 로그인 버튼 */
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #495057; /* 게시판 글쓰기 버튼 톤과 통일 */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-container button:hover {
+    opacity: 0.85;
+}
+
+/* 하단 링크 */
+.login-container .signup-link {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.login-container .signup-link a {
+    color: #495057; /* 네이비 톤 통일 */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-container .signup-link a:hover {
+    text-decoration: underline;
+}
+
+</style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>로그인</h2>
+    <form id="loginForm">
+        <input type="text" id="id" name="id" placeholder="아이디" required>
+        <input type="password" id="password" name="password" placeholder="비밀번호" required>
+        <button onclick="login()">로그인</button>
+    </form>
+    <div class="signup-link">
+        계정이 없으신가요? <a href="/signupPage">회원가입</a>
+    </div>
+</div>
+
+</body>
+<script>
+function login(){
+	const id = document.getElementById('id');
+	const password = document.getElementById('password');
+	
+	const data = 'id='+id+'&password='+password;
+	
+	fetch('/api/users/login', {
+		method:'POST', 
+		headers:{
+        'Content-Type': 'application/x-www-form-urlencoded'
+		},
+		body:data
+   })
+   .then(function(response){
+	   if(!response.ok){
+		   return response.text().then(function(msg){
+			   throw new Error(msg);
+		   });
+	   }
+	   return response.text();
+   })
+   .then(function(msg){
+	   window.alert(msg);
+	   window.location.href='/boardList';
+   })
+   .catch(function(error){
+	   window.alert(error.message);
+   });
+	   
+   
+}
+</script>
+</html>

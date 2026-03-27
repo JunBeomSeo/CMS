@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>서준범 CMS REST API 과제</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+.card {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 25px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>서준범의 CMS(Content Management System) REST API 과제</h1>
+            <p>Spring Boot + MyBatis + Oracle 기반</p>
+            <a href="/boards" class="btn">게시판 보기</a>
+        </div>
+    </div>
+</body>
+</html>

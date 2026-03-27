@@ -1,0 +1,14 @@
+package com.example.mapper.board;
+
+import com.example.board.model.BoardDTO;
+import java.util.*;
+
+public interface BoardMapper {
+	
+	public int boardWrite(BoardDTO dto);
+	public List<BoardDTO> boardList(Map<String, Integer> map);
+	public int boardTotalCnt();
+	public BoardDTO boardContent(int board_idx);
+	public void boardReadnum(int board_idx, int readnum);
+
+}

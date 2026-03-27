@@ -1,0 +1,13 @@
+package com.example.page;
+
+public class pageModule {
+	
+	public static String makePage(int cp, int totalCnt, int listSize, int pageSize, String pagename) {
+		
+		
+		StringBuffer sb = new StringBuffer();
+		
+		
+	}
+
+}

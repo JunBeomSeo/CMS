@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>맑은 준범 - 글쓰기</title>
+<style>
+    /* 전체 배경 */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    /* 카드 스타일 */
+    .card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        width: 520px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* 제목 */
+    h2 {
+        text-align: center;
+        margin-top: 0;
+        color: #222;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    /* 입력 필드 */
+    input[type="text"], textarea {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        font-family: inherit;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        min-height: 180px;
+        resize: vertical;
+    }
+
+    /* 버튼 그룹 */
+    .btn-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    button {
+        padding: 10px 22px;
+        border-radius: 10px;
+        font-size: 14px;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    /* 작성 버튼 */
+    .btn-submit {
+        background-color: #495057; /* 네이비 톤 */ 
+        color: white;
+        transition: 0.3s;
+    }
+
+    .btn-submit:hover {
+		opacity: 0.85;
+    }
+
+    /* 취소 버튼 */
+    .btn-cancel {
+        background-color:#ccc;
+        color: #000;
+        transition: 0.3s;
+    }
+
+    .btn-cancel:hover {
+		opacity: 0.85;
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h2>게시글 작성</h2>
+
+        <input type="text" name="title" placeholder="제목을 입력하세요" required>
+        <textarea name="content" placeholder="내용을 입력하세요" required></textarea>
+
+        <div class="btn-group">
+            <button type="button" class="btn-cancel" onclick="window.history.back();">취소</button>
+            <button class="btn-submit" >작성</button>
+        </div>
+
+</div>
+
+</body>
+</html>

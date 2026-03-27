@@ -1,0 +1,9 @@
+package com.example.user.service;
+
+import com.example.user.model.UserDTO;
+
+public interface UserService {
+
+	public int signup(UserDTO dto);
+	public UserDTO login(String id, String pwd);
+}
