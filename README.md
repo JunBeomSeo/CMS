@@ -52,7 +52,10 @@ Frontend
 - AJAX 처리 방식 - > XMLHttpRequest / Fetch API 방식 구현
 
 ---
+# 프로젝트 실행 방법
+- 서버 가동 후 localhost:9091로 접속
 
+---
 # Oracle DB 테이블 생성문
 아래 SQL을 실행하면 데이터베이스 테이블이 생성됩니다.
 
