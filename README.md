@@ -1,4 +1,5 @@
 # CMS REST API
+안녕하십니까 지원자 서준범입니다.
 
 본 과제는 Spring Boot 기반으로 구현한 CMS REST API 과제입니다.
 Controller - Service - Mapper 계층 구조로 설계하였으며,
