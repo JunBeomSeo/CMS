@@ -1,9 +1,0 @@
-package com.example.mapper.board;
-
-import com.example.board.model.BoardDTO;
-
-public interface BoardMapper {
-	
-	public int boardWrite(BoardDTO dto);
-
-}

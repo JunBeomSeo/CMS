@@ -1,0 +1,17 @@
+# Eclipse
+/.metadata/
+/bin/
+/.project
+/.classpath
+
+# Maven/Gradle
+/target/
+/build/
+
+# IntelliJ 등 IDE
+/.idea/
+/*.iml
+
+# OS
+.DS_Store
+Thumbs.db
