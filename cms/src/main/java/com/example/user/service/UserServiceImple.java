@@ -23,5 +23,11 @@ public class UserServiceImple implements UserService {
 		UserDTO dto = userMapper.loginCheck(id, password);
 		return dto;
 	}
+	
+	@Override
+	public int checkId(String id) {
+		int result = userMapper.checkId(id);
+		return result;
+	}
 
 }

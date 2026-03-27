@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>맑은준범 - 게시글 상세</title>
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/boardContent.css}">
+</head>
+<body>
+
+<th:block th:include="@{/header}"></th:block>
+
+<!-- 상세 컨테이너 -->
+<div class="container">
+    <h2 class="detail-title" th:text="${board.title}">게시글 제목</h2>
+    
+    <div class="detail-meta">
+        <span>작성자: <strong th:text="${board.writer}">작성자</strong></span>
+        <span>작성일: <strong th:text="${board.writedate.substring(0, 10)}">2026-03-27</strong></span>
+        <span>조회수: <strong th:text="${board.readnum}">0</strong></span>
+    </div>
+    
+    <div class="detail-content" th:text="${board.content}">
+        게시글 내용
+    </div>
+    
+    <!-- 버튼 그룹 -->
+    <div class="btn-group">
+        <a href="/boardList" class="btn-back">목록으로 돌아가기</a>
+        
+        <!-- 작성자 본인 또는 ADMIN일 경우만 표시 -->
+	<a th:if="${sw}" 
+	   th:onclick="'boardUpdate(' + ${board.board_idx} + ')'" 
+	   class="btn-edit">수정</a>
+	
+	<a th:if="${sw}" 
+	   th:onclick="'boardDelete(' + ${board.board_idx} + ')'" 
+	   class="btn-delete">삭제</a>
+    </div>
+</div>
+
+</body>
+<script>
+	var xhr;
+	function getXHR(){
+		if(window.ActiveXObject){
+			return new ActiveXObject('Msxml2.XMLHTTP');
+		}else if(window.XMLHttpRequest){
+			return new XMLHttpRequest();
+		}else{
+			return null;
+		}
+	}
+	function boardUpdate(boardIdx){
+		window.location.href = '/boardUpdate/' + boardIdx;
+	}
+	function boardDelete(boardIdx){
+		if(confirm('정말 삭제하시겠습니까?')){
+			
+			var data = 'boardIdx='+boardIdx; 
+			
+			xhr = getXHR();
+			xhr.onreadystatechange=boardDeleteResult;
+			xhr.open('DELETE', '/api/board/delete', true);
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			xhr.send(data);
+		}else{
+			return;
+		}
+	}
+	function boardDeleteResult(){
+		if(xhr.readyState == 4){
+			
+			var data = xhr.responseText;
+			
+			if(xhr.status == 200){
+				alert(data);
+				window.location.href = '/boardList';
+			}else{
+				alert(data);
+			}			
+		}
+		
+	}
+		
+</script>
+</html>

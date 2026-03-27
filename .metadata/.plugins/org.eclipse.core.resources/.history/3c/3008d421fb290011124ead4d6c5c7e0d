@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>서준범 CMS REST API 과제</title>
+<link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+		<h1>서준범의 CMS(Content Management System) REST API 과제</h1>
+		
+		<p>
+		본 프로젝트는 Spring Boot 기반으로 구현한 CMS REST API 과제입니다.<br>
+		Controller -> Service -> Mapper 계층 구조를 기반으로 설계하였으며,
+		MyBatis를 활용하여 SQL 중심의 데이터 처리 로직을 구현했습니다.
+		</p>
+		
+		<p>
+		데이터베이스는 Oracle을 사용하였으며,
+		REST API와 AJAX 기반 비동기 통신을 통해
+		게시글 작성, 조회, 수정, 삭제 기능을 제공합니다.
+		</p>
+		
+		<p>
+		기술 스택 : Spring Boot / MyBatis / Oracle / Thymeleaf / JavaScript / AJAX
+		</p>
+            <a href="/boardList" class="btn">게시판 보기</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+@charset "UTF-8";
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+}
+
+.detail-title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-family: inherit;
+}
+
+.detail-meta {
+    font-size: 14px;
+    color: #495057;
+    margin-bottom: 30px;
+}
+
+.detail-meta span {
+    margin-right: 20px;
+}
+
+
+.detail-content {
+	width: 100%;
+ 	font-size: 16px;
+    line-height: 1.7;
+    color: #333;
+    white-space: pre-wrap; 
+    min-height: 200px;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    resize: none;
+}
+
+.btn-group {
+    margin-top: 30px;
+}
+
+.btn-group a, .btn-group button {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    color: #fff;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-back {
+    background-color: #495057;
+}
+
+.btn-save {
+    background-color: #1c7ed6;
+}
+
+.btn-delete {
+    background-color: #f03e3e;
+}
+
+.btn-group a:hover, .btn-group button:hover {
+    opacity: 0.85;
+}

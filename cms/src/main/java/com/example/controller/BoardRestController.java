@@ -80,32 +80,33 @@ public class BoardRestController {
 	
 	@DeleteMapping("/delete")
 	public ResponseEntity<String> boardDelete(
-			@RequestParam(value="boardIdx", defaultValue="0")int boardIdx,
-			HttpSession session){
-		
-		ResponseEntity<String> re = null;
-		
-		int result = boardService.boardDelete(boardIdx);
-		
-		Integer loginUser = (Integer)session.getAttribute("user_idx");
-		String role = (String)session.getAttribute("role");
+	        @RequestParam int boardIdx,
+	        HttpSession session){
 
-		BoardDTO board = boardService.boardContent(boardIdx);
+	    Integer loginUser = (Integer)session.getAttribute("user_idx");
+	    String role = (String)session.getAttribute("role");
 
-		if(!role.equals("ADMIN") && board.getUser_idx() != loginUser) {
-		    return new ResponseEntity<>("삭제 권한 없음", HttpStatus.FORBIDDEN);
-		}
-	
-		String msg = "";
-		if(result>0) {
-			msg = "게시글 삭제 완료";
-			re = new ResponseEntity<>(msg, HttpStatus.OK);
-		}else {
-			msg = "게시글 삭제 실패";
-			re = new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
-		}
-		
-		return re;
+	    if(loginUser == null){
+	        return new ResponseEntity<>("로그인 필요", HttpStatus.UNAUTHORIZED);
+	    }
+
+	    BoardDTO board = boardService.boardContent(boardIdx);
+
+	    if(board == null){
+	        return new ResponseEntity<>("게시글 없음", HttpStatus.BAD_REQUEST);
+	    }
+
+	    if(!"ADMIN".equals(role) && board.getUser_idx() != loginUser){
+	        return new ResponseEntity<>("삭제 권한 없음", HttpStatus.FORBIDDEN);
+	    }
+
+	    int result = boardService.boardDelete(boardIdx);
+
+	    if(result > 0){
+	        return new ResponseEntity<>("게시글 삭제 완료", HttpStatus.OK);
+	    }
+
+	    return new ResponseEntity<>("삭제 실패", HttpStatus.BAD_REQUEST);
 	}
 	
 	@PutMapping("/update")

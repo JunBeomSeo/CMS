@@ -21,33 +21,35 @@ public class UserRestController {
 	
 	@PostMapping("/signup")
 	public ResponseEntity<String> signupSebmit(
-			@RequestParam String id,
-			@RequestParam String username,
-			@RequestParam String password) {
-		
-		String pwd = com.example.javasecur.JavaDataSecurModule.getSHA256(password);
-		
-		UserDTO dto = new UserDTO();
-		dto.setId(id);
-		dto.setUsername(username);
-		dto.setPassword(pwd);
-		dto.setRole("USER");
-		
-		int count = userService.signup(dto);
+	        @RequestParam String id,
+	        @RequestParam String username,
+	        @RequestParam String password) {
 
-		String msg = "";
-		ResponseEntity<String> re = null;
-		if(count>0) {
-			msg = "회원가입 성공하셨습니다.";
-			re = new ResponseEntity<String>(msg, HttpStatus.OK); // 200
-		}else {
-			msg = "회원가입 처리중 오류 발생";
-			re = new ResponseEntity<String>(msg, HttpStatus.BAD_REQUEST); // 400
-		}
+	    String msg = "";
 
-		// 참고 - CREATED = 201
-		
-		return re;
+	    int result = userService.checkId(id);
+	    if (result > 0) {
+	        msg = "동일한 아이디가 존재합니다.";
+	        return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
+	    }
+
+	    String pwd = com.example.javasecur.JavaDataSecurModule.getSHA256(password);
+
+	    UserDTO dto = new UserDTO();
+	    dto.setId(id);
+	    dto.setUsername(username);
+	    dto.setPassword(pwd);
+	    dto.setRole("USER");
+
+	    int count = userService.signup(dto);
+
+	    if (count > 0) {
+	        msg = "회원가입 성공하셨습니다.";
+	        return new ResponseEntity<>(msg, HttpStatus.OK);
+	    } else {
+	        msg = "회원가입 처리중 오류 발생";
+	        return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
+	    }
 	}
 	
 	@PostMapping("/login")

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>맑은준범 - 로그인</title>
+<link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+
+<div class="login-container">
+    <h2>로그인</h2>
+    <form id="loginForm">
+        <input type="text" id="id" name="id" placeholder="아이디" required>
+        <input type="password" id="password" name="password" placeholder="비밀번호" required>
+        <button onclick="login(event)">로그인</button>
+    </form>
+    <div class="signup-link">
+        계정이 없으신가요? <a href="/signupPage">회원가입</a>
+    </div>
+</div>
+
+</body>
+<script th:if="${msg}">
+    alert('[[${msg}]]');
+</script>
+<script>
+function login(){
+	event.preventDefault(); // 기본 폼 제출 막기
+	
+	const id = document.getElementById('id').value;
+	const password = document.getElementById('password').value;
+	
+	const data = 'id='+id+'&password='+password;
+	
+	fetch('/api/users/login', {
+		method:'POST', 
+		headers:{
+        'Content-Type': 'application/x-www-form-urlencoded'
+		},
+		body:data
+   })
+   .then(function(response){
+	   if(!response.ok){
+		   return response.text().then(function(msg){
+			   throw new Error(msg);
+		   });
+	   }
+	   return response.text();
+   })
+   .then(function(msg){
+	   window.alert(msg);
+	   window.location.href='/boardList';
+   })
+   .catch(function(error){
+	   window.alert(error.message);
+   });
+	   
+}
+</script>
+</html>

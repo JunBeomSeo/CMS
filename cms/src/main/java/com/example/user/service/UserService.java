@@ -6,4 +6,5 @@ public interface UserService {
 
 	public int signup(UserDTO dto);
 	public UserDTO loginCheck(String id, String password);
+	public int checkId(String id);
 }

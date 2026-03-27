@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>맑은준범 - 게시글 상세/수정</title>
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/boardWrite.css}">
+</head>
+<body>
+<th:block th:include="@{/header}"></th:block>
+<div class="container">
+    <input type="text" class="detail-title" th:value="${board.title}" id="boardTitle">
+
+    <div class="detail-meta">
+        <span>작성자: <strong th:text="${board.writer}"></strong></span>
+        <span>작성일: <strong th:text="${board.writedate.substring(0, 10)}"></strong></span>
+        <span>조회수: <strong th:text="${board.readnum}"></strong></span>
+    </div>
+
+    <textarea class="detail-content" id="boardContent" th:text="${board.content}"></textarea>
+
+    <div class="btn-group">
+        <a href="/boardList" class="btn-back">목록으로 돌아가기</a>
+        <button class="btn-save" th:onclick="'saveBoard(' + ${board.board_idx} + ')'" >저장하기</button>
+    </div>
+</div>
+
+<script>
+var xhr;
+function getXHR(){
+	if(window.ActiveXObject){
+		return new ActiveXObject('Msxml2.XMLHTTP');
+	}else if(window.XMLHttpRequest){
+		return new XMLHttpRequest();
+	}else{
+		return null;
+	}
+}
+// 게시글 저장 함수
+function saveBoard(boardIdx) {
+    const title = document.getElementById('boardTitle').value.trim();
+    const content = document.getElementById('boardContent').value.trim();
+    const idx = boardIdx;
+
+    if (!title || !content) {
+        alert('제목과 내용을 모두 입력해주세요.');
+        return;
+    }
+    
+    var data = 'boardIdx=' + idx + '&title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content);
+    
+    xhr = getXHR();
+    xhr.onreadystatechange=saveBoardResult;
+    xhr.open('PUT', '/api/board/update', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(data);
+}
+function saveBoardResult(){
+	if(xhr.readyState == 4){
+		
+		var data = xhr.responseText;
+		
+		if(xhr.status == 200){
+			alert(data);
+			window.location.href='/boardList';
+		}else{
+			alert(data);
+		}
+	}
+}
+</script>
+
+</body>
+</html>
