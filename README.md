@@ -52,11 +52,6 @@ Frontend
 
 ---
 
-#기능 명령도표
-<img width="1554" height="1315" alt="image" src="https://github.com/user-attachments/assets/aaf4d141-eb18-495e-bde7-742338bafb26" />
-
-
-
 # Oracle DB 테이블 생성문
 아래 SQL을 실행하면 데이터베이스 테이블이 생성됩니다.
 
